@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 // Layouts
 import { FullLayoutComponent } from './layouts/full-layout.component';
 import { SimpleLayoutComponent } from './layouts/simple-layout.component';
+import { SubscriptionPlanComponent } from './account-subscription/subscription-plan.component';
 
 export const routes: Routes = [
   {
@@ -63,6 +64,19 @@ export const routes: Routes = [
       {
         path: '',
         loadChildren: './organisation/organisation.module#OrganisationModule',
+      }
+    ]
+  },
+  {
+    path: 'customer',
+    component: FullLayoutComponent,
+    data: {
+      title: 'Customer'
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: './customer/customer.module#CustomerModule',
       }
     ]
   }
