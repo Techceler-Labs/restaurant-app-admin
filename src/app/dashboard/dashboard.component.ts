@@ -49,7 +49,7 @@ export class DashboardComponent implements OnInit {
       label: 'Series A'
     }
   ];
-  public lineChart1Labels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public lineChart1Labels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July','august','september'];
   public lineChart1Options: any = {
     maintainAspectRatio: false,
     scales: {
@@ -341,7 +341,7 @@ export class DashboardComponent implements OnInit {
     }
   ];
 
-  public socialChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public socialChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July','august'];
   public socialChartOptions: any = {
     responsive: true,
     maintainAspectRatio: false,
@@ -393,7 +393,7 @@ export class DashboardComponent implements OnInit {
     }
   ];
 
-  public sparklineChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public sparklineChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July','august'];
   public sparklineChartOptions: any = {
     responsive: true,
     maintainAspectRatio: false,

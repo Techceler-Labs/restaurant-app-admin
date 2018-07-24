@@ -1,0 +1,102 @@
+<!-- <div class="app flex-row align-items-center">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card-group mb-0" style="margin-bottom: -28px !important;">
+            <div class="card p-4">
+              <div class="card-body" style="border: 1px solid #c2cfd6;">
+                <h1 style="text-align:center;">Register For 14 days trial</h1>
+                <p class="text-muted" style="text-align:center;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+               
+                <div class="row"  >
+                  <div style="margin: 0 auto;">
+                    <a type="button" class="btn btn-primary px-4"  href="https://test12341234.auth.us-east-1.amazoncognito.com/login?response_type=code&client_id=76el96585015scev21vep6j9nq&redirect_uri=https://google.com">Login</a>
+                    <a type="button" class="btn btn-primary px-4"[routerLink]="['/paymentplan']">Register Now!</a>
+                    <a type="button" class="btn btn-primary px-4" (click)="signinUser()">Register Now!</a>
+                  </div> -->
+                  <!-- <div class="col-6 text-right">
+                    <button type="button" class="btn btn-link px-0">Forgot password?</button>
+                  </div> -->
+                  
+                <!-- </div>
+                
+              </div>
+            
+          </div>
+          
+        </div>
+        <footer class="app-footer" style="margin-left: 0px;">
+          <a href="http://techceler.com">Techceler</a> &copy; 2017.
+          <span class="float-right">Powered by <a href="http://techceler.com">Techceler</a></span>
+        </footer>
+      </div>
+      
+    </div>
+   
+    </div>
+  </div> -->
+  <!-- <form method="POST">
+      <div *ngIf="!disableInput; else disabled">
+        
+          <label for="userinput">User Name</label>
+          <input  id="userinput" placehoder="User Name" type="text" [(ngModel)]="username" [ngModelOptions]="{standalone: true}">
+        
+        <br>
+       
+          <label for="passinput">Password</label>
+          <input  id="passinput" placehoder="Password" type="password" required [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+           <input type="radio" [(ngModel)]="chosenProvider" [ngModelOptions]="{standalone: true}"> Option 1 
+
+          <input type="radio" value="cup" (click)="enableFields($event)"> Option 1
+          <input type="radio" value="cip" (click)="enableFields($event)"> Option 1
+
+          <a type="button" class="btn btn-primary px-4"(click)="onLogin($event)">Register Now!</a>
+
+      </div>
+      </form> -->
+      <div class="app flex-row align-items-center">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="card-group mb-0">
+                <div class="card p-4">
+                  <div class="card-body">
+                    <h1>Login</h1>
+                    <p class="text-muted">Sign In to your account</p>
+                    <div class="input-group mb-3">
+                      <span class="input-group-addon"><i class="icon-user"></i></span>
+                      <input [(ngModel)] = "user" type="text" class="form-control" placeholder="Username">
+                    </div>
+                    <div class="input-group mb-4">
+                      <span class="input-group-addon"><i class="icon-lock"></i></span>
+                      <input [(ngModel)] = "pwd" type="password" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <button type="button" class="btn btn-primary px-4"(click)="signinUser()">Login</button>
+                      </div>
+                      <div class="col-6 text-right">
+                        <button type="button" class="btn btn-link px-0">Forgot password?</button>
+                       
+                      </div>
+                      <br>
+                      <div style="color: red; padding-top: 11px;">{{error}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
+                  <div class="card-body text-center">
+                    <div>
+                      <h2>Sign up</h2>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                      <button type="button" class="btn btn-primary active mt-3" [routerLink]="['/paymentplan']" >Register Now!</button>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      

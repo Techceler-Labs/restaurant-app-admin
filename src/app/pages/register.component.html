@@ -8,25 +8,21 @@
             <p class="text-muted">Create your account</p>
             <div class="input-group mb-3">
               <span class="input-group-addon"><i class="icon-user"></i></span>
-              <input type="text" class="form-control" placeholder="Username">
+              <input [(ngModel)] = "user" type="text" class="form-control" placeholder="Username">
             </div>
 
             <div class="input-group mb-3">
               <span class="input-group-addon">@</span>
-              <input type="text" class="form-control" placeholder="Email">
+              <input [(ngModel)] = "email" type="text" class="form-control" placeholder="Email">
             </div>
 
             <div class="input-group mb-3">
               <span class="input-group-addon"><i class="icon-lock"></i></span>
-              <input type="password" class="form-control" placeholder="Password">
+              <input [(ngModel)] = "pwd" type="password" class="form-control" placeholder="Password">
             </div>
-
-            <div class="input-group mb-4">
-              <span class="input-group-addon"><i class="icon-lock"></i></span>
-              <input type="password" class="form-control" placeholder="Repeat password">
-            </div>
-
-            <button type="button" class="btn btn-block btn-success">Create Account</button>
+            <button type="button" class="btn btn-block btn-primary"  (click)="signupUser()" >Create Account</button>
+            <br>
+            <div style="color: red">{{error}}</div>
           </div>
           <div class="card-footer p-4">
             <div class="row">

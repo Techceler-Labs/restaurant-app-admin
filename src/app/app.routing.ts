@@ -9,7 +9,7 @@ import { SubscriptionPlanComponent } from './account-subscription/subscription-p
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {
@@ -77,6 +77,84 @@ export const routes: Routes = [
       {
         path: '',
         loadChildren: './customer/customer.module#CustomerModule',
+      }
+    ]
+  },
+  {
+    path: 'main',
+    component: SimpleLayoutComponent,
+    data: {
+      title: 'main'
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: './main/main.module#MainModule',
+      }
+    ]
+  },
+  {
+    path: 'paymentplan',
+    component: SimpleLayoutComponent,
+    data: {
+      title: 'paymentplan'
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: './paymentplan/paymentplan.module#PaymentplanModule',
+      }
+    ]
+  },
+  {
+    path: 'login',
+    component: SimpleLayoutComponent,
+    data: {
+      title: 'login'
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: './login/login.module#loginModule',
+      }
+    ]
+  },
+  {
+    path: 'creditcardinfo',
+    component: SimpleLayoutComponent,
+    data: {
+      title: 'creditcardinfo'
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: './creditcardinfo/creditcardinfo.module#creditcardinfoModule',
+      }
+    ]
+  },
+  {
+    path: 'codeconfirmation',
+    component: SimpleLayoutComponent,
+    data: {
+      title: 'codeconfirmation'
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: './codeconfirmation/codeconfirmation.module#codeconfirmationModule',
+      }
+    ]
+  },
+  {
+    path: 'menu',
+    component: FullLayoutComponent,
+    data: {
+      title: 'menu'
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: './menu/menu.module#menuModule',
       }
     ]
   }

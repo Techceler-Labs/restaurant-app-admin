@@ -1,0 +1,95 @@
+<!--<form>
+ 
+  <input type="text" placeholder="Credit Card #" name="cardNumber">
+  <input type="text" placeholder="Expiration Month" name="expMonth">
+  <input type="text" placeholder="Expiration Year" name="expYear">
+  <input type="text" placeholder="CVC" name="cvc">
+  <a (click)="chargeCreditCard()">submin</a>
+  <button>Submit</button>
+  
+</form>--> 
+<br> <br>
+
+<form >
+<div class="col-sm-4" style="margin:0 auto;">
+  <div class="card">
+    <div class="card-header">
+      <strong>Credit Card</strong>
+      <small>Form</small>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label class="required">Email Address</label>
+                <div class="input-group">
+                    <input [(ngModel)] = "email" type="text" class="form-control" placeholder="Email Address" name="email" />
+                    <span class="input-group-addon"><span class="fa fa-envelope-o"></span></span>
+                </div>
+            </div>
+            </div>
+          </div><!--/.row-->
+            <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label class="required">CARD NUMBER</label>
+            <div class="input-group">
+                <input type="tel" class="form-control" placeholder="Valid Card Number" name="cardNumber"/>
+                <span class="input-group-addon"><span class="fa fa-credit-card"></span></span>
+            </div>
+        </div>
+        </div>
+      </div><!--/.row-->
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label for="ccmonth" class="required">Month</label>
+          <select class="form-control" name="expMonth">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+          </select>
+        </div>
+        <div class="form-group col-sm-4">
+          <label for="ccyear" class="required">Year</label>
+          <select class="form-control" name="expYear">
+            <option>2014</option>
+            <option>2015</option>
+            <option>2016</option>
+            <option>2017</option>
+            <option>2018</option>
+            <option>2019</option>
+            <option>2020</option>
+            <option>2021</option>
+            <option>2022</option>
+            <option>2023</option>
+            <option>2024</option>
+            <option>2025</option>
+          </select>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="cvv" class="required">CVV/CVC</label>
+            <input type="text" class="form-control" name="cvc" placeholder="123">
+          </div>
+        </div>
+      </div><!--/.row-->
+      
+    </div>
+    <div class="card-footer">
+      <a (click)="chargeCreditCard()" class="btn btn-primary px-4" style="color: white;"><i class="fa fa-dot-circle-o"></i> Submit </a>
+      <a  class="btn btn-primary px-4" style="color: white;" [routerLink]="['/paymentplan']"><i class="icon-arrow-left icons font-1"></i> Back </a> 
+      <div style="padding-top: 10px; color: red">{{err}}</div>
+    </div>
+   
+  </div>
+</div><!--/.col-->
+</form>
