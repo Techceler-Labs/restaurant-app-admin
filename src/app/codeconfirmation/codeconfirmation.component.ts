@@ -17,13 +17,18 @@ import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 })
 export class codeconfirmationComponent implements OnInit {
     username;
+    pwd;
     error;
     constructor(private router : Router) { }
     code;
 
 ngOnInit(){
     this.username=localStorage.getItem("username");
+    this.pwd=localStorage.getItem("pwd");
     console.log(this.username);
+    //console.log(this.pwd);
+
+
 }
     poolData = { 
         UserPoolId : 'us-east-1_Tamsmqfbk',
@@ -43,9 +48,49 @@ ngOnInit(){
             this.error=err.message;
           } else {
             console.log('You have been confirmed ')
-            this.router.navigate(['/creditcardinfo']);
-
+            //this.router.navigate(['/creditcardinfo']);
+            const userData = {
+              Username:username,
+              Pool: this.userPool
+          };
+          const cognitoUser = new CognitoUser(userData);
+            const authData = {
+              Username: username,
+              Password: this.pwd
+          };
+          const authDetails = new AWSCognito.AuthenticationDetails(authData);
+        
+           cognitoUser.authenticateUser(authDetails, {
+            onSuccess: (result) => {
+               console.log('You are now Logged in');
+               this.router.navigate(['/creditcardinfo']);
+               //console.log(this.userPool.getCurrentUser());
+            },
+            onFailure: (err) => {
+              console.log('There was an error during login, please try again -> ', err);
+              console.log(this.username);
+              this.error=err.message;
+            
+            }
+          })
           }
        })
      }
+  getinfo(){
+      var cognitoUser = this.userPool.getCurrentUser();
+    
+        if (cognitoUser != null) {
+            cognitoUser.getSession(function(err, session) {
+                if (err) {
+                    alert(err);
+                    return;
+                }
+                console.log('session validity: ' + session.isValid());
+                console.log(cognitoUser);
+            });
+        }
+        else{
+          console.log("not loged in");
+        }
+    }
 }

@@ -31,7 +31,7 @@ export class PaymentplanComponent implements OnInit {
 }
   constructor(private http: Http,private router : Router){}
     clickbasic(){
-     localStorage.setItem(this.plan_id,'plan_DDmZR6SX1666pZ');
+     localStorage.setItem(this.plan_id,'11');
      this.router.navigate(['/pages/register'],{ queryParams: {id:this.plan_id} });
      //console.log(this.plan_id);
      // this.router.navigate(['https://test12341234.auth.us-east-1.amazoncognito.com/login?response_type=code&client_id=76el96585015scev21vep6j9nq&redirect_uri=https://google.com'],{ queryParams: {id:this.plan_id} });

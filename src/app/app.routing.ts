@@ -81,15 +81,15 @@ export const routes: Routes = [
     ]
   },
   {
-    path: 'main',
+    path: 'forgotpassword',
     component: SimpleLayoutComponent,
     data: {
-      title: 'main'
+      title: 'forgotpassword'
     },
     children: [
       {
         path: '',
-        loadChildren: './main/main.module#MainModule',
+        loadChildren: './forgotpassword/forgotpassword.module#forgotpasswordModule',
       }
     ]
   },

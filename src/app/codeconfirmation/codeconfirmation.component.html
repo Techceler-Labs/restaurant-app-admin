@@ -14,11 +14,12 @@
                       <span class="input-group-addon"><i class="icon-lock"></i></span>
                        <input [(ngModel)] = "code" type="password" class="form-control" placeholder="write the code">
                     </div>
+                    
                     <div class="row">
                       <div class="col-6">
                         <button type="button" class="btn btn-primary px-4"(click)="confirmUser()">Submit</button>
                         <button type="button" class="btn btn-primary px-4"[routerLink]="['/pages/register']"><i class="icon-arrow-left icons font-1"></i> Back</button>
-                        
+
                        
                       </div>
                       <div class="col-6 text-right">

@@ -3,22 +3,18 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import   * as AWSCognito from 'amazon-cognito-identity-js';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import { AwsService } from '../services/aws.service';
-import { Callback } from '../services/aws.service';
-import { Subscription } from 'rxjs';
-import { CognitoIdentity } from 'aws-sdk';
+
 import { CognitoUser, CognitoUserPool, CognitoUserAttribute } from 'amazon-cognito-identity-js';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+
 
 @Component({
   templateUrl: 'login.component.html'
 })
 export class loginComponent {
   isUser: any;
-  user;
+  user="";
   pwd;
   error;
    constructor(private router : Router){
@@ -31,6 +27,7 @@ export class loginComponent {
     userPool = new CognitoUserPool(this.poolData)
      
   signinUser(username: string=this.user, password:string=this.pwd) {
+    
     const userData = {
       Username:username,
       Pool: this.userPool
@@ -46,8 +43,8 @@ export class loginComponent {
     onSuccess: (result) => {
        console.log('You are now Logged in');
        console.log('in hello');
-       //this.isUser.next(true);
        console.log('in hello');
+       //localStorage.setItem("pwd",this.pwd);
        this.router.navigate(['/dashboard']);
        //console.log(this.userPool.getCurrentUser());
     },
@@ -55,39 +52,64 @@ export class loginComponent {
       console.log('There was an error during login, please try again -> ', err);
       console.log('out hello');
       this.error=err.message;
-
+    
     }
   })
+  }
+  resetPassword(username:string=this.user) {
+  
+    console.log(this.user);
+    const userData = {
+      Username:username,
+      Pool: this.userPool
+  };
+  const cognitoUser = new CognitoUser(userData);
+  
+  cognitoUser.forgotPassword({
+    onSuccess:(result)=> {
+      console.log("success");
+        console.log('call result: ' + result);
+        this.error="";
+    },
+    onFailure:(err)=> {
+      console.log("fail");
+    this.error="Username or valid information required";
+     //alert(err);
+    },
+    inputVerificationCode() { // this is optional, and likely won't be implemented as in AWS's example (i.e, prompt to get info)
+    //this.router.navigate(['/forgotpassword']);
+        var verificationCode =prompt('Please input verification code ', '');
+        var newPassword = prompt('Enter new password ', '');
+        cognitoUser.confirmPassword(verificationCode, newPassword, this);
+    }
+  });
 }
-/// Sign Up User
-// signupUser(user: string="shayanshakil", password: string="Shayan134*", email: string="shanistar_94@yahoo.com") {
-//   const dataEmail = {
-//     Name: 'email',
-//     Value: email
-//   };
-//   const  emailAtt = [new CognitoUserAttribute(dataEmail)];
-//   this.userPool.signUp(user,  password, emailAtt, null, ((err, result) => {
-//     if (err) {
-//       console.log('There was an error ', err);
-//     } else {
-//       console.log('You have successfully signed up, please confirm your email ')
-//     }
-//   }))
-// }
-// confirmUser(username: string="shakil", code: string="618708") {
-//   const userData = {
-//     Username: username,
-//     Pool: this.userPool
-//   };
+getinfo(){
+  var cognitoUser = this.userPool.getCurrentUser();
 
-  // const cognitoUser = new CognitoUser(userData);
+    if (cognitoUser != null) {
+        cognitoUser.getSession(function(err, session) {
+            if (err) {
+                alert(err);
+                return;
+            }
+            console.log('session validity: ' + session.isValid());
+            console.log(cognitoUser);
+        });
+    }
+    else{
+      console.log("not loged in");
+    }
+}
+logout(){
+  var cognitoUser = this.userPool.getCurrentUser();
 
-  // cognitoUser.confirmRegistration(code, true, (err, result) => {
-  //   if (err) {
-  //     console.log('There was an error -> ', err)
-  //   } else {
-  //     console.log('You have been confirmed ')
-  //   }
-  // })
-//}
+  if (cognitoUser != null) {
+    cognitoUser.signOut();
+    console.log("signout")
+  }
+  else{
+    console.log("not signed in");
+  }
+}
 }

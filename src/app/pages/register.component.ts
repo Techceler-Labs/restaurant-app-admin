@@ -58,6 +58,7 @@ export class RegisterComponent {
     } else {
       console.log('You have successfully signed up, please confirm your email ');
       localStorage.setItem("username",this.user);
+      localStorage.setItem("pwd",this.pwd);
       this.router.navigate(['/codeconfirmation']);
       }
    }))
