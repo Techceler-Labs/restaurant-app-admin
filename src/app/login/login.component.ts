@@ -7,17 +7,37 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { CognitoUser, CognitoUserPool, CognitoUserAttribute } from 'amazon-cognito-identity-js';
+import { EmailValidator } from '../../../node_modules/@angular/forms';
 
 
 @Component({
   templateUrl: 'login.component.html'
 })
-export class loginComponent {
+export class loginComponent implements OnInit {
   isUser: any;
   user="";
   pwd;
+  
+  echeck2;
   error;
-   constructor(private router : Router){
+  emailarray=[];
+ constructor(private router : Router, private http: Http){
+  }
+  ngOnInit(){
+      
+      const headers = new Headers();
+       headers.append('Authorization', 'Bearer sk_test_WZsveb2QAfyEC01MQwUapsk2');
+       this.http.get('https://api.stripe.com/v1/customers',{headers:headers })
+         .subscribe((resp) => {
+        // console.log(resp.json().data[0].email);
+        console.log(resp.json().data.length);
+       for(var i = 1; i < resp.json().data.length; i++){
+         this.emailarray[i]=resp.json().data[i].email;
+         console.log(this.emailarray[i]);
+       }
+      })
+      
+
   }
    poolData = { 
         UserPoolId : 'us-east-1_Tamsmqfbk',
@@ -43,16 +63,33 @@ export class loginComponent {
     onSuccess: (result) => {
        console.log('You are now Logged in');
        console.log('in hello');
-       console.log('in hello');
-       //localStorage.setItem("pwd",this.pwd);
-       this.router.navigate(['/dashboard']);
+       if (cognitoUser != null) {
+        cognitoUser.getSession(function(err, session) {
+            if (err) {
+                alert(err);
+                return;
+            }
+           //console.log(session.getIdToken().payload.email);
+           let emailcheck=session.getIdToken().payload.email;
+           localStorage.setItem("emailcheck",emailcheck);
+          });
+       }
+       this.echeck2=localStorage.getItem("emailcheck");
+        console.log(this.echeck2);  
+        if(this.echeck2){
+          console.log("welcome");
+        }
+        else{
+          console.log("please pay");
+        }
+      //localStorage.setItem("pwd",this.pwd);
+       //this.router.navigate(['/dashboard']);
        //console.log(this.userPool.getCurrentUser());
-    },
+  },
     onFailure: (err) => {
       console.log('There was an error during login, please try again -> ', err);
       console.log('out hello');
       this.error=err.message;
-    
     }
   })
   }
@@ -84,32 +121,27 @@ export class loginComponent {
     }
   });
 }
-getinfo(){
-  var cognitoUser = this.userPool.getCurrentUser();
+// getinfo(){
+//   var cognitoUser = this.userPool.getCurrentUser();
 
-    if (cognitoUser != null) {
-        cognitoUser.getSession(function(err, session) {
-            if (err) {
-                alert(err);
-                return;
-            }
-            console.log('session validity: ' + session.isValid());
-            console.log(cognitoUser);
-        });
-    }
-    else{
-      console.log("not loged in");
-    }
-}
-logout(){
-  var cognitoUser = this.userPool.getCurrentUser();
+//     if (cognitoUser != null) {
+//         cognitoUser.getSession(function(err, session) {
+//             if (err) {
+//                 alert(err);
+//                 return;
+//             }
+//             console.log('session validity: ' + session.isValid());
+//             console.log('session token: ' + session.getIdToken().payload.email);
+//             console.log(session);
+            
+            
+//         });
+//     }
+//     else{
+//       console.log("not loged in");
+//     }
+//  }
 
-  if (cognitoUser != null) {
-    cognitoUser.signOut();
-    console.log("signout")
-  }
-  else{
-    console.log("not signed in");
-  }
-}
+
+//}
 }

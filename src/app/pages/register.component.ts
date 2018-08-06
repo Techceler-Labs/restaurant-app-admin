@@ -22,7 +22,8 @@ export class RegisterComponent {
   user;
   pwd;
   email;
-  error
+  error;
+  organisation;
   constructor(private route: ActivatedRoute,private router : Router) { }
   
   poolData = {
@@ -39,16 +40,18 @@ export class RegisterComponent {
     });
   }
 
-  navigatetopaymentplan(){
-    this.router.navigate(['/creditcardinfo'],{ queryParams: {id:this.planid} });
-  }
+  //navigatetopaymentplan(){
+    //.router.navigate(['/creditcardinfo'],{ queryParams: {id:this.planid} });
+  //}
 
   signupUser(user: string=this.user, password: string=this.pwd, email: string=this.email) {
     const dataEmail = {
       Name: 'email',
       Value: email
   };
+  
   const  emailAtt = [new CognitoUserAttribute(dataEmail)];
+ 
 
   this.userPool.signUp(user,  password, emailAtt, null, ((err, result) => {
     if (err) {
@@ -60,7 +63,9 @@ export class RegisterComponent {
       localStorage.setItem("username",this.user);
       localStorage.setItem("pwd",this.pwd);
       this.router.navigate(['/codeconfirmation']);
+      
       }
    }))
+  
   }
 }

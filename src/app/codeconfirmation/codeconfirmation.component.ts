@@ -27,8 +27,6 @@ ngOnInit(){
     this.pwd=localStorage.getItem("pwd");
     console.log(this.username);
     //console.log(this.pwd);
-
-
 }
     poolData = { 
         UserPoolId : 'us-east-1_Tamsmqfbk',
@@ -86,6 +84,8 @@ ngOnInit(){
                     return;
                 }
                 console.log('session validity: ' + session.isValid());
+                console.log('session token: ' + session.getIdToken().getJwtToken());
+
                 console.log(cognitoUser);
             });
         }
